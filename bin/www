@@ -8,11 +8,13 @@ var app = require('../app');
 var debug = require('debug')('test-express-logging:server');
 var http = require('http');
 
+require('dotenv').config();
+
 /**
  * Get port from environment and store in Express.
  */
 
-var port = normalizePort(process.env.PORT || '3000');
+var port = normalizePort(process.env.SERVER_PORT);
 app.set('port', port);
 
 /**
@@ -87,4 +89,8 @@ function onListening() {
     ? 'pipe ' + addr
     : 'port ' + addr.port;
   debug('Listening on ' + bind);
+
+  var serverAddr = addr.address;
+  var serverPort = addr.port;
+  console.info(`server listening on ${ serverAddr }:${ serverPort } for ${ process.env.NODE_ENV }`);
 }
