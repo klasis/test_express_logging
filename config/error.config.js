@@ -16,6 +16,8 @@ function errorMiddleware (err, req, res, next) {
     } else {
         console.error(`[${ moment().tz(process.env.SERVER_LOCATION).format('YYYY-MM-DD HH:mm:ss Z z') }] [ERROR]: ${ errMsg }`);
     }
+
+    return null;
 }
 
 module.exports = errorMiddleware;
