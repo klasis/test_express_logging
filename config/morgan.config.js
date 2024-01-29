@@ -11,10 +11,10 @@ const morganMiddleware = morgan((tokens, req, res) => {
 
     // 응답 상태가 성공일 경우
     if (statusCode < 400) {
-        if (process.env.NODE_ENV === 'development') {
-            console.info(`[${ moment().tz(process.env.SERVER_LOCATION).format('YYYY-MM-DD HH:mm:ss Z z') }] [INFO]: ${ logMsg }`);
-        } else {
+        if (process.env.NODE_ENV === 'production') {
             logger.info(logMsg);
+        } else {
+            console.info(`[${ moment().tz(process.env.SERVER_LOCATION).format('YYYY-MM-DD HH:mm:ss Z z') }] [INFO]: ${ logMsg }`);
         }
     }
 

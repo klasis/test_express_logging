@@ -11,10 +11,10 @@ function errorMiddleware (err, req, res, next) {
 
     const errMsg = `${ req.method } ${ req.path } ${ statusCode }\n[REQUEST] ${ reqBodyStr } ${ truncatedStack }`;
 
-    if (process.env.NODE_ENV === 'development') {
-        console.error(`[${ moment().tz(process.env.SERVER_LOCATION).format('YYYY-MM-DD HH:mm:ss Z z') }] [ERROR]: ${ errMsg }`);
-    } else {
+    if (process.env.NODE_ENV === 'production') {
         logger.error(errMsg);
+    } else {
+        console.error(`[${ moment().tz(process.env.SERVER_LOCATION).format('YYYY-MM-DD HH:mm:ss Z z') }] [ERROR]: ${ errMsg }`);
     }
 }
 

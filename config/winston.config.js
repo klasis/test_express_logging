@@ -19,7 +19,6 @@ const logLevels = {
 
 // 로그 포맷 정의
 const logFormat = winston.format.combine(
-    // winston.format.timestamp({ format: () => new Date().toLocaleString('en-US', { timeZone: process.env.SERVER_LOCATION, timeZoneName: 'short', hour12: false, day: '2-digit', month: '2-digit', year: '2-digit', second: '2-digit', minute: '2-digit', hour: '2-digit' }) }),
     winston.format.timestamp({ format: () => moment().tz(process.env.SERVER_LOCATION).format('YYYY-MM-DD HH:mm:ss Z z') }),
     winston.format.printf(({ level, message, timestamp }) => {
         return `[${ timestamp }] [${ level.toUpperCase() }]: ${ message }`;
@@ -28,10 +27,13 @@ const logFormat = winston.format.combine(
 
 // 로그 공통 옵션
 const logPublicOptions = {
+    // 로그 파일명의 날짜 UTC 지정
     utc: true,
+    // 로그 파일명의 날짜 포맷 지정
     datePattern: 'YYYY-MM-DD',
+    // 로그 파일 gzip 압축 여부
     zippedArchive: true,
-    // 로그 파일을 30일간 보관
+    // 로그 파일 보관 기관: 30일
     maxFiles: '30d',
     format: logFormat
 };

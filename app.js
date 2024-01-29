@@ -1,8 +1,6 @@
-var createError = require('http-errors');
 var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
-var logger = require('morgan');
 
 require('dotenv').config();
 
@@ -23,6 +21,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+// debug handler
 app.use(moranMiddleware);
 
 app.use('/', indexRouter);
